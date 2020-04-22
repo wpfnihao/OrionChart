@@ -1,0 +1,28 @@
+image:
+  pullPolicy: IfNotPresent
+imagePullSecrets: []
+
+controller:
+  port: "9125"
+  service: orioncontroller
+  image:
+    repository: virtaitech/orion-controller
+    version: dtf
+
+server:
+  port: "9970"
+  mode: "rdma"
+  image:
+    repository: virtaitech/orion-server
+    version: dtf
+
+plugin:
+  image:
+    repository: virtaitech/orion-plugin
+    version: dtf
+
+license:
+  key: ""
+
+volumes:
+  shm: /dev/shm
