@@ -9,7 +9,7 @@ spec:
     matchLabels:
       app: orion
       name: controller
-  replicas: 1
+  replicas: 3
   template:
     metadata:
       labels:
@@ -25,12 +25,30 @@ spec:
         - name: {{ .Values.imagePullSecrets }}
         {{- end }}
         env:
-        - name : PORT
+        - name: PORT
           value : {{ .Values.controller.port }}
+        - name: EXT_DB
+          value: 127.0.0.1:9020
+        - name: TOKEN
+          value: ""
+        - name: ADMIN_PASSWD
+          value: admin
+        - name: ENABLE_QUOTA
+          value: "0"
         ports:
         - name: controller
           containerPort: {{ .Values.controller.port | atoi }}
+        - name: port1
+          containerPort: {{ TODO }}
+        - name: port2
+          containerPort: {{ TODO }}
         env:
         - name: ORION_LICENSE
           value: {{ .Values.license.key }}
-
+        volumeMounts:
+        - name: time
+          mountPath: /etc/localtime
+      volumes:
+      - name: time
+        hostPath:
+          path: /etc/localtime
