@@ -19,24 +19,24 @@ spec:
       - key: node-role.kubernetes.io/master
         effect: NoSchedule
       containers:
-      - image: nvidia/dcgm-exporter
+      - image: {{ .Values.monitor.image.exporter.repository }}
         name: nv-exporter
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         volumeMounts:
         - name: prometheus
-          mountPath: /run/prometheus
-      - image: quay.io/prometheus/node-exporter
+          mountPath: {{ .Values.monitor.collectorPath }}
+      - image: {{ .Values.monitor.image.prometheus.repository }}
         name: prometheus
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         args:
-        - --collector.textfile.directory=/run/prometheus
+        - --collector.textfile.directory={{- .Values.monitor.collectorPath }}
         ports:
         - name: prometheus
-          containerPort: 9100
+          containerPort: {{ .Values.monitor.port }}
         volumeMounts:
         - name: prometheus
-          mountPath: /run/prometheus
+          mountPath: {{ .Values.monitor.collectorPath }}
       volumes:
       - name: prometheus
         hostPath:
-          path: /run/prometheus
+          path: {{ .Values.monitor.collectorPath }}

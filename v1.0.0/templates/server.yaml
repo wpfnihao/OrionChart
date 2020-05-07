@@ -23,8 +23,8 @@ spec:
       hostNetwork: true
       hostIPC: true
       hostPID: true
-      nodeSelector:
-        gpu: "true"
+      #nodeSelector:
+      #  gpu: "true"
       containers:
       - image: '{{ .Values.server.image.repository }}:{{ default .Chart.AppVersion .Values.server.image.version }}'
         name: orion-server
@@ -35,41 +35,62 @@ spec:
         {{- end }}
         securityContext:
           privileged: true
-        resources:
-          limits:
-            nvidia.com/gpu: 1
+        #resources:
+        #  limits:
+        #    nvidia.com/gpu: 1
         volumeMounts:
-          - name: binary
-            mountPath: "/usr/bin/oriond"
-          - name: entry
-            mountPath: "/entrypoint.sh"
-          - name: shm
-            mountPath: {{ .Values.volumes.shm }}
-          - name: libnvidia 
-            mountPath: "/usr/lib/libnv"
-        env:
-        - name : LD_LIBRARY_PATH
-          value : "/usr/lib/libnv"
-        - name : ORION_CONTROLLER
-          value : '{{ .Values.controller.service }}:{{ .Values.controller.port | atoi }}'
-        - name : PORT
-          value : {{ .Values.server.port }}
-        - name : BIND_ADDR
-          value : "10.10.50.100"
-        - name : MODE
-          value : {{ .Values.server.mode }}
-      volumes:
         - name: binary
-          hostPath:
-            path: /root/oriond
-            type: File
+          mountPath: "/usr/bin/oriond"
         - name: entry
-          hostPath:
-            path: /root/entrypoint.sh
-            type: File
+          mountPath: "/entrypoint.sh"
         - name: shm
-          hostPath:
-            path: {{ .Values.volumes.shm }}
-        - name: libnvidia
-          hostPath:
-            path: /root/libnv
+          mountPath: {{ .Values.volumes.shm }}
+        - name: libnvidia 
+          mountPath: "/usr/lib/libnv"
+        - name: timezone
+          mountPath: /etc/timezone
+        - name: time
+          mountPath: /etc/localtime
+        - name: comm
+          mountPath: {{ .Values.server.path.comm }}
+        env:
+        - name: LD_LIBRARY_PATH
+          value: "/usr/lib/libnv"
+        - name: ORION_CONTROLLER
+          value: '{{ .Values.controller.service }}:{{ .Values.controller.port | atoi }}'
+        - name: PORT
+          value: {{ .Values.server.port }}
+        - name: ORION_BIND_NET
+          value: {{ .Values.server.net }}
+        {{- if .Values.server.ibName }}
+        - name: ORION_IB_NAME
+          value: {{ .Values.server.ibName }}
+        {{- end }}
+        - name: MODE
+          value: {{ .Values.server.mode }}
+        - name: ORION_VGPU_COUNT
+          value: {{ .Values.server.vgpus }}
+      volumes:
+      - name: timezone
+        hostPath:
+          path: /etc/timezone
+      - name: time
+        hostPath:
+          path: /etc/localtime
+      - name: comm
+        hostPath:
+          path: {{ .Values.server.path.comm }}
+      - name: binary
+        hostPath:
+          path: /root/oriond
+          type: File
+      - name: entry
+        hostPath:
+          path: /root/entrypoint.sh
+          type: File
+      - name: shm
+        hostPath:
+          path: {{ .Values.volumes.shm }}
+      - name: libnvidia
+        hostPath:
+          path: /root/libnv

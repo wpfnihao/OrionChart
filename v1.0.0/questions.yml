@@ -52,3 +52,36 @@ questions:
   type: string
   group: "License"
   required: true
+- variable: controller.password
+  default: "admin"
+  description: "Password used to login to Orion controller web ui"
+  label: Controller Password
+  type: string
+  required: true
+  group: "Orion Controller"
+- variable: controller.enableQuota
+  default: "false"
+  description: "Controller enables quota"
+  label: Controller Quota
+  type: boolean
+  group: "Orion Controller"
+- variable: server.net
+  default: "eth0"
+  description: "network interface used by Orion Server, This is a critical setting!"
+  label: Server Net
+  type: string
+  group: "Orion Server"
+  required: true
+- variable: server.vgpus
+  default: "4"
+  description: "number of vGPUs enabled on each Orion server"
+  label: Server VGPU
+  type: string
+  group: "Orion Server"
+  required: true
+- variable: server.ibName
+  default: ""
+  description: "infiniband network name"
+  label: Server IB
+  type: string
+  group: "Orion Server"

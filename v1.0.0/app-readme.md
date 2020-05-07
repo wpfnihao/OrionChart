@@ -6,9 +6,10 @@ Universal Repository Manager supporting all major packaging formats, build tools
 
 This chart will do the following:
 
-* Deploy Orion controller
+* Deploy Orion controller (with web ui)
 * Deploy Orion server
-* Deploy Orion WebUI (optional)
+* Deploy Orion kubernetes device plugin (support resource like `virtaitech.com/gpu`)
+* Deploy Orion scheduler
 
 To use the Orion, you may want to deploy [Orion Client](https://virtai.tech/)
 
