@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: orion-monitor
+  labels:
+    k8s-app: virtaitech
+spec:
+  selector:
+  matchLabels:
+    name: orion-monitor
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: orion-monitor
+    spec:
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+      containers:
+      - image: {{ .Values.monitor.image.exporter.repository }}
+        name: nv-exporter
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        volumeMounts:
+        - name: prometheus
+          mountPath: {{ .Values.monitor.collectorPath }}
+      - image: {{ .Values.monitor.image.prometheus.repository }}
+        name: prometheus
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        args:
+        - --collector.textfile.directory={{- .Values.monitor.collectorPath }}
+        ports:
+        - name: prometheus
+          containerPort: {{ .Values.monitor.port }}
+        volumeMounts:
+        - name: prometheus
+          mountPath: {{ .Values.monitor.collectorPath }}
+      volumes:
+      - name: prometheus
+        hostPath:
+          path: {{ .Values.monitor.collectorPath }}

@@ -1,0 +1,87 @@
+categories:
+- repository
+labels:
+  io.rancher.certified: partner
+questions:
+- variable: defaultImage
+  default: "true"
+  description: "Use default Orion image, change this with caution"
+  label: Use Default Image
+  type: boolean
+  show_subquestion_if: false
+  group: "Container Images"
+  subquestions:
+  - variable: server.image.repository
+    default: "virtaitech/orion-server"
+    description: "Orion server image name"
+    type: string
+    label: Server Image Name
+  - variable: server.image.version
+    default: "dtf"
+    description: "Orion server image tag"
+    type: string
+    label: Server Image Tag
+  - variable: controller.image.repository
+    default: "virtaitech/orion-controller"
+    description: "Orion controller image name"
+    type: string
+    label: Controller Image Name
+  - variable: controller.image.version
+    default: "dtf"
+    description: "Orion controller image tag"
+    type: string
+    label: Controller Image Tag
+  - variable: plugin.image.repository
+    default: "virtaitech/orion-plugin"
+    description: "Plugin controller image name"
+    type: string
+    label: Plugin Image Name
+  - variable: plugin.image.version
+    default: "dtf"
+    description: "Plugin controller image tag"
+    type: string
+    label: Plugin Image Tag
+  - variable: imagePullSecrets
+    description: "Image Pull Secret"
+    type: string
+    label: Image Pull Secret
+- variable: license.key
+  default: ""
+  description: "A license key is required to use Orion vGPU, if you don't have one, please visit https://virtai.tech to get one."
+  label: License Key
+  type: string
+  group: "License"
+  required: true
+- variable: controller.password
+  default: "admin"
+  description: "Password used to login to Orion controller web ui"
+  label: Controller Password
+  type: string
+  required: true
+  group: "Orion Controller"
+- variable: controller.enableQuota
+  default: "false"
+  description: "Controller enables quota"
+  label: Controller Quota
+  type: boolean
+  group: "Orion Controller"
+- variable: server.net
+  default: "eth0"
+  description: "network interface used by Orion Server, This is a critical setting!"
+  label: Server Net
+  type: string
+  group: "Orion Server"
+  required: true
+- variable: server.vgpus
+  default: "4"
+  description: "number of vGPUs enabled on each Orion server"
+  label: Server VGPU
+  type: string
+  group: "Orion Server"
+  required: true
+- variable: server.ibName
+  default: ""
+  description: "infiniband network name"
+  label: Server IB
+  type: string
+  group: "Orion Server"
