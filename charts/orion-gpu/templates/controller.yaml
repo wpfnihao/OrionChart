@@ -9,7 +9,7 @@ spec:
     matchLabels:
       app: orion
       name: controller
-  replicas: 3
+  replicas: {{ .Values.controller.replicas }}
   template:
     metadata:
       labels:
@@ -43,16 +43,21 @@ spec:
         - name: controller
           containerPort: {{ .Values.controller.port | atoi }}
         - name: port1
-          containerPort: {{ .Values.controller.port | atoi }} # TODO
+          containerPort: {{ .Values.controller.port | atoi | add 1 }}
         - name: port2
-          containerPort: {{ .Values.controller.port | atoi }} # TODO
+          containerPort: {{ .Values.controller.port | atoi | add 2 }}
         env:
         - name: ORION_LICENSE
           value: {{ .Values.license.key }}
         volumeMounts:
         - name: time
           mountPath: /etc/localtime
+        - name: timezone
+          mountPath: /etc/timezone
       volumes:
       - name: time
         hostPath:
           path: /etc/localtime
+      - name: timezone
+        hostPath:
+          path: /etc/timezone

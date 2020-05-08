@@ -2,6 +2,9 @@ image:
   pullPolicy: IfNotPresent
 imagePullSecrets: []
 
+resources:
+  name: "virtaitech.com/gpu"
+
 monitor:
   collectorPath: /run/prometheus
   image:
@@ -20,6 +23,7 @@ controller:
   password: "admin"
   enableQuota: "false" # or "true"
   token: "TODO"
+  replicas: 3
 
 server:
   port: "9970"
@@ -29,7 +33,7 @@ server:
     version: "2.1"
   path:
     comm: /var/tmp/orion/comm
-  net: eth0
+  net: enp3s0
   vgpus: "4"
   ibName: ""
 
@@ -48,6 +52,7 @@ scheduler:
     extender:
       repository: virtaitech/orion-scheduler-extender
       version: "2.1"
+  port: 8888
 
 license:
   key: ""

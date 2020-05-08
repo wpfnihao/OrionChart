@@ -11,3 +11,5 @@ spec:
   externalName: {{ .Values.controller.service -}}.default.svc.cluster.local
   ports:
   - port: {{ .Values.controller.port | atoi }}
+  - port: {{ .Values.controller.port | atoi | add 1 }}
+  - port: {{ .Values.controller.port | atoi | add 2 }}

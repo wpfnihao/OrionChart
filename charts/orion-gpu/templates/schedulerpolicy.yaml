@@ -9,7 +9,7 @@ data:
     "kind" : "Policy",
     "apiVersion" : "v1",
     "extenders" : [{
-      "urlPrefix": "http://localhost:8888",
+      "urlPrefix": "http://localhost:{{ .Values.scheduler.port }}",
       "filterVerb": "filter",
       "prioritizeVerb": "",
       "preemptVerb": "",
@@ -17,7 +17,7 @@ data:
       "weight": 1,
       "managedResources": [
         {
-          "name": "virtaitech.com/gpu",
+          "name": "{{ .Values.resources.name }}",
           "ignoredByScheduler": false
         }
       ],

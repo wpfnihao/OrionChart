@@ -1,6 +1,6 @@
 # VirtAI Orion Virtual GPU Platform
 
-Universal Repository Manager supporting all major packaging formats, build tools and CI servers.
+Placeholder
 
 ## Chart Details
 
@@ -19,4 +19,4 @@ To use the Orion, you may want to deploy [Orion Client](https://virtai.tech/)
 
 ## Activate Your Orion
 
-Don't have a license? Please visit [VirtAI Tech](https://virtai.tech/) to get it.
+Don't have a license? Please visit [VirtAI Tech](https://virtai.tech/) to one trial license for FREE.

@@ -38,8 +38,12 @@ spec:
           - name: device-shm
             mountPath: {{ .Values.volumes.shm }}
         env:
-        - name : ORION_CONTROLLER
-          value : '{{ .Values.controller.service }}:{{ .Values.controller.port | atoi }}'
+        - name: ORION_CONTROLLER
+          value: '{{ .Values.controller.service }}:{{ .Values.controller.port | atoi }}'
+        - name: ORION_RES_NAME 
+          value: {{ .Values.resources.name }}
+        - name: ORION_BIND_NET
+          value: {{ .Values.server.net }}
       volumes:
         - name: device-plugin
           hostPath:
