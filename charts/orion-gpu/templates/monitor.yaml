@@ -6,8 +6,8 @@ metadata:
     k8s-app: virtaitech
 spec:
   selector:
-  matchLabels:
-    name: orion-monitor
+    matchLabels:
+      name: orion-monitor
   updateStrategy:
     type: RollingUpdate
   template:

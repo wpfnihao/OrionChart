@@ -26,9 +26,9 @@ spec:
         {{- end }}
         env:
         - name: PORT
-          value : {{ .Values.controller.port }}
+          value: {{ .Values.controller.port }}
         - name: EXT_DB
-          value: 127.0.0.1:9020
+          value: "127.0.0.1:9020"
         - name: TOKEN
           value: {{ .Values.controller.token }}
         - name: ADMIN_PASSWD
@@ -36,16 +36,16 @@ spec:
         - name: ENABLE_QUOTA
         {{- if eq .Values.controller.enableQuota "true" }}
           value: "1"
-        {{- else -}}
+        {{- else }}
           value: "0"
         {{- end }}
         ports:
         - name: controller
           containerPort: {{ .Values.controller.port | atoi }}
         - name: port1
-          containerPort: {{ TODO }}
+          containerPort: {{ .Values.controller.port | atoi }} # TODO
         - name: port2
-          containerPort: {{ TODO }}
+          containerPort: {{ .Values.controller.port | atoi }} # TODO
         env:
         - name: ORION_LICENSE
           value: {{ .Values.license.key }}
