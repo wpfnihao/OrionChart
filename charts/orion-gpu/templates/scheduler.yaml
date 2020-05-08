@@ -6,7 +6,7 @@ metadata:
   labels:
     app: orion-scheduler
 spec:
-  replicas: 1
+  replicas: {{ .Values.scheduler.replicas }}
   selector:
     matchLabels:
       app: orion-scheduler
@@ -24,20 +24,23 @@ spec:
       - name: orion-scheduler-ctr
         image: '{{ .Values.scheduler.image.scheduler.repository }}:{{ .Values.scheduler.image.scheduler.version }}'
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        {{- if .Values.imagePullSecrets }}
+        imagePullSecrets:
+        - name: {{ .Values.imagePullSecrets }}
+        {{- end }}
         args:
         - kube-scheduler
         - --config=/orion-scheduler/config.yaml
-        - -v=4
+        - -v={{- .Values.scheduler.verbose }}
         volumeMounts:
         - name: orion-scheduler-config
           mountPath: /orion-scheduler
       - name: orion-scheduler-extender-ctr
         image: '{{ .Values.scheduler.image.extender.repository }}:{{ default .Chart.AppVersion .Values.scheduler.image.scheduler.version }}'
         command: ["/go/bin/scheduler"]
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
         env:
           - name: ORION_CONTROLLER
-            value: "controller.default.svc.cluster.local:5678"
+            value: "controller.default.svc.cluster.local:5678" # TODO how to make sure svc.cluster.local is the correct suffix?
           - name: ORION_API_VERSION
             value: {{ default .Chart.AppVersion .Values.scheduler.apiVersion }}
           - name: ORION_DATA_VERSION

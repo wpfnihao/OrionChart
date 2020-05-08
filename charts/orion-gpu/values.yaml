@@ -9,13 +9,16 @@ monitor:
   collectorPath: /run/prometheus
   image:
     exporter:
-      repository: nvidia/dcgm-exporter
+      repository: virtaitech/dcgm-export #nvidia/dcgm-exporter
+      version: "2.1"
     prometheus:
-      repository: quay.io/prometheus/node-exporter
+      repository: virtaitech/node-exporter #quay.io/prometheus/node-exporter
+      version: "2.1"
   port: 9100
 
 controller:
   port: "15500"
+  nodeport: 30007
   service: orioncontroller
   image:
     repository: virtaitech/orion-controller
@@ -23,7 +26,7 @@ controller:
   password: "admin"
   enableQuota: "false" # or "true"
   token: "TODO"
-  replicas: 3
+  replicas: 1
 
 server:
   port: "9970"
@@ -38,21 +41,24 @@ server:
   ibName: ""
 
 plugin:
+  path: /var/lib/kubelet/device-plugins
   image:
     repository: virtaitech/orion-plugin
     version: "2.1"
 
 scheduler:
+  replicas: 1
   apiVersion: "2.1"
   dataVersion: "2.1"
   image:
     scheduler:
-      repository: gcr.io/google_containers/hyperkube
-      version: v1.16.3
+      repository: virtaitech/hyperkube #gcr.io/google_containers/hyperkube:v1.16.3
+      version: "2.1"
     extender:
       repository: virtaitech/orion-scheduler-extender
       version: "2.1"
   port: 8888
+  verbose: 4
 
 license:
   key: ""

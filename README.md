@@ -1,2 +1,3 @@
 # OrionChart
-Kubernetes Helm &amp; Rancher Chart of Orion
+
+Kubernetes Helm & Rancher Chart of Orion

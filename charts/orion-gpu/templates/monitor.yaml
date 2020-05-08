@@ -19,15 +19,23 @@ spec:
       - key: node-role.kubernetes.io/master
         effect: NoSchedule
       containers:
-      - image: {{ .Values.monitor.image.exporter.repository }}
+      - image: '{{ .Values.monitor.image.exporter.repository }}:{{ default .Chart.AppVersion .Values.monitor.image.exporter.version }}'
         name: nv-exporter
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        {{- if .Values.imagePullSecrets }}
+        imagePullSecrets:
+        - name: {{ .Values.imagePullSecrets }}
+        {{- end }}
         volumeMounts:
         - name: prometheus
           mountPath: {{ .Values.monitor.collectorPath }}
-      - image: {{ .Values.monitor.image.prometheus.repository }}
+      - image: '{{ .Values.monitor.image.prometheus.repository }}:{{ default .Chart.AppVersion .Values.monitor.image.prometheus.version }}'
         name: prometheus
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        {{- if .Values.imagePullSecrets }}
+        imagePullSecrets:
+        - name: {{ .Values.imagePullSecrets }}
+        {{- end }}
         args:
         - --collector.textfile.directory={{- .Values.monitor.collectorPath }}
         ports:

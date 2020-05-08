@@ -5,7 +5,7 @@ labels:
 questions:
 - variable: defaultImage
   default: "true"
-  description: "Use default Orion image, change this with caution"
+  description: "Use default Orion image, change this with caution!"
   label: Use Default Image
   type: boolean
   show_subquestion_if: false
@@ -41,6 +41,46 @@ questions:
     description: "Plugin controller image tag"
     type: string
     label: Plugin Image Tag
+  - variable: monitor.image.exporter.repository
+    default: "virtaitech/dcgm-exporter"
+    description: "dcgm exporter image name"
+    type: string
+    label: dcgm Image Name
+  - variable: monitor.image.exporter.version
+    default: "2.1"
+    description: "dcgm exporter image tag"
+    type: string
+    label: dcgm Image Tag
+  - variable: monitor.image.prometheus.repository
+    default: "virtaitech/node-exporter"
+    description: "node exporter image name"
+    type: string
+    label: Node Image Name
+  - variable: monitor.image.prometheus.version
+    default: "2.1"
+    description: "node exporter image tag"
+    type: string
+    label: Node Image Tag
+  - variable: scheduler.image.scheduler.repository
+    default: "virtaitech/hyperkube"
+    description: "scheduler image name"
+    type: string
+    label: Scheduler Image Name
+  - variable: scheduler.image.scheduler.version
+    default: "2.1"
+    description: "scheduler image version"
+    type: string
+    label: Scheduler Image Tag
+  - variable: scheduler.image.extender.repository
+    default: "virtaitech/orion-scheduler-extender"
+    description: "extender image name"
+    type: string
+    label: Extender Image Name
+  - variable: scheduler.image.extender.version
+    default: "2.1"
+    description: "extender image version"
+    type: string
+    label: Extender Image Tag
   - variable: imagePullSecrets
     description: "Image Pull Secret"
     type: string
@@ -50,7 +90,7 @@ questions:
   description: "A license key is required to use Orion vGPU, if you don't have one, please visit https://virtai.tech to get one."
   label: License Key
   type: string
-  group: "License"
+  group: "General"
   required: true
 - variable: controller.password
   default: "admin"
@@ -58,30 +98,36 @@ questions:
   label: Controller Password
   type: string
   required: true
-  group: "Orion Controller"
+  group: "General"
 - variable: controller.enableQuota
   default: "false"
-  description: "Controller enables quota"
+  description: "Controller enables quota limitations. please visit https://virtai.tech for more information."
   label: Controller Quota
   type: boolean
-  group: "Orion Controller"
+  group: "Settings"
 - variable: server.net
   default: "eth0"
-  description: "network interface used by Orion Server, This is a critical setting!"
+  description: "network interface used by Orion Server, This is a critical setting! Orion assumes that network interfaces to be used by Orion on Kubernetes nodes have exactly the same name."
   label: Server Net
   type: string
-  group: "Orion Server"
+  group: "Network"
   required: true
 - variable: server.vgpus
   default: "4"
-  description: "number of vGPUs enabled on each Orion server"
+  description: "number of vGPUs generated for each NVidia physical GPU."
   label: Server VGPU
   type: string
-  group: "Orion Server"
+  group: "Settings"
   required: true
 - variable: server.ibName
   default: ""
-  description: "infiniband network name"
+  description: "infiniband network name. Please leave it blank if you do not know how to set this value, Orion will try to auto detect the settings."
   label: Server IB
   type: string
-  group: "Orion Server"
+  group: "Network"
+- variable: resources.name
+  default: "virtaitech.com/gpu"
+  description: "Resource name provided by Kubernetes and then be request by Orion client"
+  label: Resource
+  type: string
+  group: "General"
