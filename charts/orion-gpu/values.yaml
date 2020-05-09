@@ -25,19 +25,19 @@ controller:
     version: "2.1"
   password: "admin"
   enableQuota: "false" # or "true"
-  token: "TODO"
+  token: ""
   replicas: 1
 
 server:
   port: "9970"
   mode: "rdma"
+  cudaVersion: "10.0"
   image:
-    repository: virtaitech/orion-cu10.0-tf1.13-py36-hvd
     version: "2.1"
   path:
     comm: /var/tmp/orion/comm
   net: enp3s0
-  vgpus: "4"
+  vgpus: 4
   ibName: ""
 
 plugin:

@@ -26,7 +26,7 @@ spec:
       #nodeSelector:
       #  gpu: "true"
       containers:
-      - image: '{{ .Values.server.image.repository }}:{{ default .Chart.AppVersion .Values.server.image.version }}'
+      - image: 'virtaitech/orion-cu{{- .Values.server.cudaVersion -}}-tf1.13-py36-hvd:{{ default .Chart.AppVersion .Values.server.image.version }}'
         name: orion-server
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         {{- if .Values.imagePullSecrets }}
@@ -69,7 +69,7 @@ spec:
         - name: MODE
           value: {{ .Values.server.mode }}
         - name: ORION_VGPU_COUNT
-          value: {{ .Values.server.vgpus }}
+          value: '{{ .Values.server.vgpus }}'
       volumes:
       - name: timezone
         hostPath:

@@ -11,11 +11,12 @@ questions:
   show_subquestion_if: false
   group: "Container Images"
   subquestions:
-  - variable: server.image.repository
-    default: "virtaitech/orion-server"
-    description: "Orion server image name"
-    type: string
-    label: Server Image Name
+  # cannot set server iamge repository
+  #- variable: server.image.repository
+  #  default: "virtaitech/orion-server"
+  #  description: "Orion server image name"
+  #  type: string
+  #  label: Server Image Name
   - variable: server.image.version
     default: "dtf"
     description: "Orion server image tag"
@@ -96,7 +97,14 @@ questions:
   default: "admin"
   description: "Password used to login to Orion controller web ui"
   label: Controller Password
-  type: string
+  type: password
+  required: true
+  group: "General"
+- variable: controller.token
+  default: ""
+  description: "token used to call advanced controller api"
+  label: Controller Token
+  type: password
   required: true
   group: "General"
 - variable: controller.enableQuota
@@ -113,12 +121,25 @@ questions:
   group: "Network"
   required: true
 - variable: server.vgpus
-  default: "4"
+  default: 4
   description: "number of vGPUs generated for each NVidia physical GPU."
   label: Server VGPU
-  type: string
+  type: int
   group: "Settings"
   required: true
+- variable: server.cudaVersion
+  default: "10.0"
+  description: "cuda version to be supported by Orion"
+  label: Server CUDA
+  type: enum
+  group: "Settings"
+  required: true
+  options:
+  - "10.0"
+  - "10.1"
+  - "9.0"
+  - "9.1"
+  - "9.2"
 - variable: server.ibName
   default: ""
   description: "infiniband network name. Please leave it blank if you do not know how to set this value, Orion will try to auto detect the settings."
@@ -127,6 +148,7 @@ questions:
   group: "Network"
 - variable: resources.name
   default: "virtaitech.com/gpu"
+  required: true
   description: "Resource name provided by Kubernetes and then be request by Orion client"
   label: Resource
   type: string

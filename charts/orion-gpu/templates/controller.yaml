@@ -17,6 +17,16 @@ spec:
         name: controller
     spec:
       containers:
+      - name: prometheus
+        image: prom/prometheus
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        {{- if .Values.imagePullSecrets }}
+        imagePullSecrets:
+        - name: {{ .Values.imagePullSecrets }}
+        {{- end }}
+        volumeMounts:
+        - name: prometheus
+          mountPath: /etc/prometheus/prometheus.yml
       - name: controller
         image: '{{ .Values.controller.image.repository }}:{{ default .Chart.AppVersion .Values.controller.image.version }}'
         imagePullPolicy: {{ .Values.image.pullPolicy }}
@@ -55,6 +65,9 @@ spec:
         - name: timezone
           mountPath: /etc/timezone
       volumes:
+      - name: prometheus
+        configMap:
+          name: orion-controller-prometheus-config
       - name: time
         hostPath:
           path: /etc/localtime
