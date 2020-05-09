@@ -122,6 +122,8 @@ questions:
   required: true
 - variable: server.vgpus
   default: 4
+  min: 1
+  max: 100
   description: "number of vGPUs generated for each NVidia physical GPU."
   label: Server VGPU
   type: int
