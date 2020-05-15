@@ -26,7 +26,7 @@ spec:
         {{- end }}
         volumeMounts:
         - name: prometheus
-          mountPath: /etc/prometheus/prometheus.yml
+          mountPath: /etc/prometheus
       - name: controller
         image: '{{ .Values.controller.image.repository }}:{{ default .Chart.AppVersion .Values.controller.image.version }}'
         imagePullPolicy: {{ .Values.image.pullPolicy }}
@@ -36,7 +36,7 @@ spec:
         {{- end }}
         env:
         - name: PORT
-          value: {{ .Values.controller.port }}
+          value: '{{ .Values.controller.port }}'
         - name: EXT_DB
           value: "127.0.0.1:9020"
         - name: TOKEN

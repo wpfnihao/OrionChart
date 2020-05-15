@@ -59,7 +59,7 @@ spec:
         - name: ORION_CONTROLLER
           value: '{{ .Values.controller.service }}:{{ .Values.controller.port | atoi }}'
         - name: PORT
-          value: {{ .Values.server.port }}
+          value: '{{ .Values.server.port }}'
         - name: ORION_BIND_NET
           value: {{ .Values.server.net }}
         {{- if .Values.server.ibName }}
