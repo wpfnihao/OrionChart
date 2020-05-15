@@ -39,14 +39,16 @@ spec:
         image: '{{ .Values.scheduler.image.extender.repository }}:{{ default .Chart.AppVersion .Values.scheduler.image.scheduler.version }}'
         command: ["/go/bin/scheduler"]
         env:
-          - name: ORION_CONTROLLER
-            value: "controller.default.svc.cluster.local:5678" # TODO how to make sure svc.cluster.local is the correct suffix?
-          - name: ORION_API_VERSION
-            value: {{ default .Chart.AppVersion .Values.scheduler.apiVersion }}
-          - name: ORION_DATA_VERSION
-            value: {{ default .Chart.AppVersion .Values.scheduler.dataVersion }}
-          - name: MANAGED_ORION_SERVER
-            value: "true" # always true for helm chart
+        - name: ORION_CONTROLLER
+          value: "controller.default.svc.cluster.local:5678" # TODO how to make sure svc.cluster.local is the correct suffix?
+        - name: ORION_API_VERSION
+          value: {{ default .Chart.AppVersion .Values.scheduler.apiVersion }}
+        - name: ORION_DATA_VERSION
+          value: {{ default .Chart.AppVersion .Values.scheduler.dataVersion }}
+        - name: MANAGED_ORION_SERVER
+          value: "true" # always true for helm chart
+        - name: ORION_RES_NAME
+          value: {{ .Values.resources.name }}
         livenessProbe:
           httpGet:
             path: /

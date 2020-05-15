@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: prometheus
-        image: prom/prometheus
+        image: '{{ .Values.controller.image.prom }}:{{ default .Chart.AppVersion .Values.controller.image.version }}'
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         {{- if .Values.imagePullSecrets }}
         imagePullSecrets:

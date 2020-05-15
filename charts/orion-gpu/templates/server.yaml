@@ -26,7 +26,7 @@ spec:
       #nodeSelector:
       #  gpu: "true"
       containers:
-      - image: 'virtaitech/orion-cu{{- .Values.server.cudaVersion -}}-tf1.13-py36-hvd:{{ default .Chart.AppVersion .Values.server.image.version }}'
+      - image: 'virtaitech/orion-server-cuda{{- .Values.server.cudaVersion -}}:{{ default .Chart.AppVersion .Values.server.image.version }}'
         name: orion-server
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         {{- if .Values.imagePullSecrets }}

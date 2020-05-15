@@ -21,7 +21,8 @@ controller:
   nodeport: 30007
   service: orioncontroller
   image:
-    repository: virtaitech/orion-controller
+    prom: virtaitech/prometheus
+    repository: virtaitech/orion-controller-ent
     version: "2.1"
   password: "admin"
   enableQuota: "false" # or "true"
@@ -31,7 +32,7 @@ controller:
 server:
   port: "9970"
   mode: "rdma"
-  cudaVersion: "10.0"
+  cudaVersion: "10.1"
   image:
     version: "2.1"
   path:
