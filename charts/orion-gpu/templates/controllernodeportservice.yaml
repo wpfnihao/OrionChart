@@ -12,11 +12,14 @@ spec:
     port: {{ .Values.controller.port | atoi }}
     targetPort: controller
     nodePort: {{ .Values.controller.nodeport }}
+    name: controller
   - protocol: TCP
     port: {{ .Values.controller.port | atoi | add 1 }}
     targetPort: port1
     nodePort: {{ .Values.controller.nodeport | add 1 }}
+    name: port1
   - protocol: TCP
     port: {{ .Values.controller.port | atoi | add 2 }}
     targetPort: port2
     nodePort: {{ .Values.controller.nodeport | add 2 }}
+    name: port2
