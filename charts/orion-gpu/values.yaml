@@ -18,6 +18,10 @@ monitor:
 
 controller:
   port: "15500"
+  portName:
+  - "controller"
+  - "port1"
+  - "port2"
   nodeport: 30007
   service: orioncontroller
   image:

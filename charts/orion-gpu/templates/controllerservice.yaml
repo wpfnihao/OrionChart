@@ -10,12 +10,12 @@ spec:
   - protocol: TCP
     port: {{ .Values.controller.port | atoi }}
     targetPort: controller
-    name: controller
+    name: {{ .Values.controller.portName[0] }}
   - protocol: TCP
     port: {{ .Values.controller.port | atoi | add 1 }}
     targetPort: port1
-    name: port1
+    name: {{ .Values.controller.portName[1] }}
   - protocol: TCP
     port: {{ .Values.controller.port | atoi | add 2 }}
     targetPort: port2
-    name: port2
+    name: {{ .Values.controller.portName[2] }}
