@@ -25,7 +25,7 @@ controller:
     repository: virtaitech/orion-controller-ent
     version: "2.1"
   password: "admin"
-  enableQuota: "false" # or "true"
+  enableQuota: false # or true
   token: ""
   replicas: 1
 

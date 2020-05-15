@@ -44,7 +44,7 @@ spec:
         - name: ADMIN_PASSWD
           value: {{ .Values.controller.password }}
         - name: ENABLE_QUOTA
-        {{- if eq .Values.controller.enableQuota "true" }}
+        {{- if eq .Values.controller.enableQuota true }}
           value: "1"
         {{- else }}
           value: "0"
