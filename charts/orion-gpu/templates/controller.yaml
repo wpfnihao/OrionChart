@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: controller
+  name: {{ .Values.controller.name }}
   labels:
-    name: controller
+    name: {{ .Values.controller.name }}
 spec:
   selector:
     matchLabels:
       app: orion
-      name: controller
+      name: {{ .Values.controller.name }}
   replicas: {{ .Values.controller.replicas }}
   template:
     metadata:
       labels:
         app: orion
-        name: controller
+        name: {{ .Values.controller.name }}
     spec:
       containers:
       - name: prometheus

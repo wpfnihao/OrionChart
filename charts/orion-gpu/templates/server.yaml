@@ -39,14 +39,14 @@ spec:
         #  limits:
         #    nvidia.com/gpu: 1
         volumeMounts:
-        - name: binary
-          mountPath: "/usr/bin/oriond"
-        - name: entry
-          mountPath: "/entrypoint.sh"
-        - name: shm
-          mountPath: {{ .Values.volumes.shm }}
-        - name: libnvidia 
-          mountPath: "/usr/lib/libnv"
+        #- name: binary
+        #  mountPath: "/usr/bin/oriond"
+        #- name: entry
+        #  mountPath: "/entrypoint.sh"
+        #- name: shm
+        #  mountPath: {{ .Values.volumes.shm }}
+        #- name: libnvidia 
+        #  mountPath: "/usr/lib/libnv"
         - name: timezone
           mountPath: /etc/timezone
         - name: time
@@ -66,8 +66,8 @@ spec:
         - name: ORION_IB_NAME
           value: {{ .Values.server.ibName }}
         {{- end }}
-        - name: MODE
-          value: {{ .Values.server.mode }}
+        #- name: MODE
+        #  value: {{ .Values.server.mode }}
         - name: ORION_VGPU_COUNT
           value: '{{ .Values.server.vgpus }}'
       volumes:
@@ -80,17 +80,17 @@ spec:
       - name: comm
         hostPath:
           path: {{ .Values.server.path.comm }}
-      - name: binary
-        hostPath:
-          path: /root/oriond
-          type: File
-      - name: entry
-        hostPath:
-          path: /root/entrypoint.sh
-          type: File
-      - name: shm
-        hostPath:
-          path: {{ .Values.volumes.shm }}
-      - name: libnvidia
-        hostPath:
-          path: /root/libnv
+      #- name: binary
+      #  hostPath:
+      #    path: /root/oriond
+      #    type: File
+      #- name: entry
+      #  hostPath:
+      #    path: /root/entrypoint.sh
+      #    type: File
+      #- name: shm
+      #  hostPath:
+      #    path: {{ .Values.volumes.shm }}
+      #- name: libnvidia
+      #  hostPath:
+      #    path: /root/libnv

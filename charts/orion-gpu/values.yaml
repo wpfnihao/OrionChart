@@ -17,12 +17,13 @@ monitor:
   port: 9100
 
 controller:
+  name: "orion-controller"
   port: "15500"
   portName0: "controller"
   portName1: "port1"
   portName2: "port2"
   nodeport: 30007
-  service: orioncontroller
+  service: orion-controller
   image:
     prom: virtaitech/prometheus
     repository: virtaitech/orion-controller-ent
@@ -40,7 +41,7 @@ server:
     version: "2.1"
   path:
     comm: /var/tmp/orion/comm
-  net: enp3s0
+  net: eth0
   vgpus: 4
   ibName: ""
 

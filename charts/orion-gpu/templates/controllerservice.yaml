@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     app: orion
-    name: controller
+    name: {{ .Values.controller.name }}
   ports:
   - protocol: TCP
     port: {{ .Values.controller.port | atoi }}
