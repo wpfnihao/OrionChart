@@ -65,7 +65,7 @@ spec:
         - name: timezone
           mountPath: /etc/timezone
         - name: license
-          mountPath: /root
+          mountPath: /root # TODO: move this to a different place, remember to change --license in the container
       volumes:
       - name: prometheus
         configMap:

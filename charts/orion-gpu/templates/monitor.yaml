@@ -4,16 +4,19 @@ metadata:
   name: orion-monitor
   labels:
     k8s-app: virtaitech
+    app: orion-monitor
 spec:
   selector:
     matchLabels:
       name: orion-monitor
+      app: orion-monitor
   updateStrategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
         name: orion-monitor
+        app: orion-monitor
     spec:
       tolerations:
       - key: node-role.kubernetes.io/master

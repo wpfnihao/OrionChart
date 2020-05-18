@@ -2,9 +2,9 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: orion-server
-  app: orion-server
   labels:
     k8s-app: virtaitech
+    app: orion-server
 spec:
   selector:
     matchLabels:
