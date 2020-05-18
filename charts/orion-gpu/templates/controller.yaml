@@ -35,7 +35,7 @@ spec:
         - name: {{ .Values.imagePullSecrets }}
         {{- end }}
         env:
-        - name: PORT
+        - name: ORION_PORT
           value: '{{ .Values.controller.port }}'
         - name: EXT_DB
           value: "127.0.0.1:9020"
@@ -43,6 +43,8 @@ spec:
           value: {{ .Values.controller.token }}
         - name: ADMIN_PASSWD
           value: {{ .Values.controller.password }}
+        - name: ORION_LICENSE
+          value: {{ .Values.license.key }}
         - name: ENABLE_QUOTA
         {{- if eq .Values.controller.enableQuota true }}
           value: "1"
@@ -56,9 +58,6 @@ spec:
           containerPort: {{ .Values.controller.port | atoi | add 1 }}
         - name: port2
           containerPort: {{ .Values.controller.port | atoi | add 2 }}
-        env:
-        - name: ORION_LICENSE
-          value: {{ .Values.license.key }}
         volumeMounts:
         - name: time
           mountPath: /etc/localtime

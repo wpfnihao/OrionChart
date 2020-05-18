@@ -21,12 +21,15 @@ spec:
       - key: node-role.kubernetes.io/master
         effect: NoSchedule
       hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       hostIPC: true
       hostPID: true
       #nodeSelector:
       #  gpu: "true"
       containers:
       - image: 'virtaitech/orion-server-cuda{{- .Values.server.cudaVersion -}}:{{ default .Chart.AppVersion .Values.server.image.version }}'
+        #command: ["/bin/bash", "-c", "/entrypoint.sh"]
+        #command: ["/bin/bash", "-c", "sleep infinity"]
         name: orion-server
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         {{- if .Values.imagePullSecrets }}
