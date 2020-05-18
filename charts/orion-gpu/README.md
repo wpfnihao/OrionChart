@@ -14,6 +14,18 @@ VirtAI Orion Platform can virtualize GPUs and create GPU resource pool to:
 * Dynamic scaling
   * Change Orion virtual GPU settings without rebooting!
 
+## Prerequsitions
+
+Please visit [VirtAI Tech](https://virtai.tech/) for more information.
+
+* Properly installed NVidia GPU drivers on GPU nodes. Orion will **NOT** try to handle these drivers.
+* Container runtime `containerd` with version >= 1.3.2
+  * NVidia docker runtime enabled on GPU nodes.
+  * Check the container runtime by `kubectl get node [nodename]`
+* Orion assumes the network interface to be used has exactly the same name among all nodes (e.g. `eth0`). If not, it's users' responsibility to properly config these network interface names.
+* (recommaned) Properly configured RDMA environment for best performance.
+  * If Infiniband is used, OFED should be properly installed.
+
 ## Chart Details
 
 This chart will do the following:
@@ -24,6 +36,10 @@ This chart will do the following:
 * Deploy Orion scheduler
 
 To use Orion, you may want to deploy [Orion Client](https://virtai.tech/)
+
+## Use Orion VGPU
+
+Please visit [VirtAI Tech](https://virtai.tech/) to get detailed docs on how to deploy Orion client.
 
 ## Useful links
 
