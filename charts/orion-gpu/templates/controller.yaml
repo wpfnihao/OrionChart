@@ -16,6 +16,7 @@ spec:
         app: orion
         name: {{ .Values.controller.name }}
     spec:
+      serviceAccountName: orion-controller
       containers:
       - name: prometheus
         image: '{{ .Values.controller.image.prom }}:{{ default .Chart.AppVersion .Values.controller.image.version }}'
@@ -63,10 +64,15 @@ spec:
           mountPath: /etc/localtime
         - name: timezone
           mountPath: /etc/timezone
+        - name: license
+          mountPath: /root
       volumes:
       - name: prometheus
         configMap:
           name: orion-controller-prometheus-config
+      - name: license
+        configMap:
+          name: orion-controller-license
       - name: time
         hostPath:
           path: /etc/localtime

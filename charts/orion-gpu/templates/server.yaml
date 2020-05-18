@@ -2,12 +2,14 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: orion-server
+  app: orion-server
   labels:
     k8s-app: virtaitech
 spec:
   selector:
     matchLabels:
       name: orion-server
+      app: orion-server
   updateStrategy:
     type: RollingUpdate
   template:
@@ -16,6 +18,7 @@ spec:
         scheduler.alpha.kubernetes.io/critical-pod: ""
       labels:
         name: orion-server
+        app: orion-server
     spec:
       tolerations:
       - key: node-role.kubernetes.io/master
@@ -61,7 +64,7 @@ spec:
           value: "/usr/lib/libnv"
         - name: ORION_CONTROLLER
           value: '{{ .Values.controller.service }}:{{ .Values.controller.port | atoi }}'
-        - name: PORT
+        - name: PORT # TODO: do not have effect
           value: '{{ .Values.server.port }}'
         - name: ORION_BIND_NET
           value: {{ .Values.server.net }}
