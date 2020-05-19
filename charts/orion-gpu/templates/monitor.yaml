@@ -34,7 +34,7 @@ spec:
           mountPath: {{ .Values.monitor.collectorPath }}
         # fix crash on cpu node, just a workaround
         command: [ "/bin/bash", "-c", "--" ]
-        args: [ "dcgm-exporter -e; sleep infinity"]
+        args: [ "/usr/bin/dcgm-exporter; sleep infinity"]
       - image: '{{ .Values.monitor.image.prometheus.repository }}:{{ default .Chart.AppVersion .Values.monitor.image.prometheus.version }}'
         name: prometheus
         imagePullPolicy: {{ .Values.image.pullPolicy }}

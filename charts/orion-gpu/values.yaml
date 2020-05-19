@@ -41,7 +41,7 @@ server:
     version: "2.1"
   path:
     comm: /var/tmp/orion/comm
-  net: eth0
+  net: ens5
   vgpus: 4
   ibName: ""
 

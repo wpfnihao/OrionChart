@@ -64,8 +64,10 @@ spec:
           mountPath: /etc/localtime
         - name: timezone
           mountPath: /etc/timezone
-        - name: license
-          mountPath: /root # TODO: move this to a different place, remember to change --license in the container
+        - name: licensefile
+          mountPath: /root/license.txt
+        #- name: license
+        #  mountPath: /root # TODO: move this to a different place, remember to change --license in the container
       volumes:
       - name: prometheus
         configMap:
@@ -79,3 +81,6 @@ spec:
       - name: timezone
         hostPath:
           path: /etc/timezone
+      - name: licensefile
+        hostPath:
+          path: /home/ubuntu/license.txt
