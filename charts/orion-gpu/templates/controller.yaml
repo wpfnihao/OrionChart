@@ -41,11 +41,11 @@ spec:
         - name: EXT_DB
           value: "127.0.0.1:9090" # TODO: should be the same as the port in prometheus
         - name: TOKEN # TODO: use secret?
-          value: {{ .Values.controller.token }}
+          value: '{{ .Values.controller.token }}'
         - name: ADMIN_PASSWD # TODO: use secret?
-          value: {{ .Values.controller.password }}
+          value: '{{ .Values.controller.password }}'
         - name: ORION_LICENSE
-          value: {{ .Values.license.key }}
+          value: '{{ .Values.license.key }}'
         - name: ENABLE_QUOTA
         {{- if eq .Values.controller.enableQuota true }}
           value: "1"
