@@ -16,7 +16,7 @@ spec:
     metadata:
       annotations:
         prometheus.io/scrape: 'true'
-        prometheus.io/port: '9100'
+        prometheus.io/port: '{{ .Values.monitor.port }}'
         prometheus.io/path: 'metrics'
       labels:
         name: orion-monitor

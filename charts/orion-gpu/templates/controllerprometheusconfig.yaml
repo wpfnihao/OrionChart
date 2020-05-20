@@ -34,14 +34,23 @@ data:
         #static_configs:
         #- targets: 
         #  - '172.31.28.1:9100' # TODO: how to set this?
+        #  - '172.31.43.188:9100' # TODO: how to set this?
 
-        # https://stackoverflow.com/questions/52766020/how-to-discover-pods-for-prometheus-to-scrape
+        #https://stackoverflow.com/questions/52766020/how-to-discover-pods-for-prometheus-to-scrape
         kubernetes_sd_configs:
         - role: pod 
         relabel_configs:
         - source_labels: [__meta_kubernetes_pod_label_app]
           regex: orion-monitor
           action: keep
+        - source_labels: [__meta_kubernetes_pod_host_ip, __meta_kubernetes_pod_annotation_prometheus_io_port]
+          action: replace
+          regex: ([^:]+)(?::\d+)?;(\d+)
+          replacement: $1:$2
+          target_label: __address__
+        - source_labels: [__meta_kubernetes_pod_host_ip]
+          target_label: ip
+
         #relabel_configs:
         #- source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
         #  action: keep
