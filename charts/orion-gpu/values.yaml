@@ -3,6 +3,8 @@ image:
 imagePullSecrets: []
 
 resources:
+  # Interesting Config:
+  # resource name exposed by Orion
   name: "virtaitech.com/gpu"
 
 monitor:
@@ -14,6 +16,8 @@ monitor:
     prometheus:
       repository: virtaitech/node-exporter #quay.io/prometheus/node-exporter
       version: "2.1"
+  # this port is also used by controller to scrap info.
+  # should not change this value
   port: 9100
 
 controller:
@@ -28,21 +32,30 @@ controller:
     prom: virtaitech/prometheus
     repository: virtaitech/orion-controller-ent
     version: "2.1"
+  # Interesting Config:
   password: "admin"
+  # Interesting Config:
   enableQuota: false # or true
+  # Interesting Config:
   token: ""
+  # changing this value not tested
   replicas: 1
 
 server:
-  port: "9970"
-  mode: "rdma"
+  port: "9960"
+  #mode: "rdma"
+  # Interesting Config:
+  # TODO: requires addtional images
   cudaVersion: "10.1"
   image:
     version: "2.1"
   path:
     comm: /var/tmp/orion/comm
+  # Interesting Config:
   net: ens5
+  # Interesting Config:
   vgpus: 4
+  # Interesting Config:
   ibName: ""
 
 plugin:
@@ -66,6 +79,7 @@ scheduler:
   verbose: 4
 
 license:
+  # Interesting Config:
   key: ""
 
 volumes:

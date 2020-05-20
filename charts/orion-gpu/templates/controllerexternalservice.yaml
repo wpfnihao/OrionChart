@@ -8,7 +8,7 @@ metadata:
 spec:
   type: ExternalName
   # please make sure this dns entry pointing to the correct service name
-  externalName: {{ .Values.controller.service -}}.default.svc.cluster.local
+  externalName: {{ .Values.controller.service -}}.{{- .Release.Namespace -}}.svc.cluster.local
   ports:
   - port: {{ .Values.controller.port | atoi }}
     name: {{ .Values.controller.portName0 }}

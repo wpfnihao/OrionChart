@@ -64,7 +64,7 @@ spec:
           value: "/usr/lib/libnv"
         - name: ORION_CONTROLLER
           value: '{{ .Values.controller.service }}:{{ .Values.controller.port | atoi }}'
-        - name: PORT # TODO: do not have effect
+        - name: ORION_SERVER_PORT # TODO: changing this value not tested
           value: '{{ .Values.server.port }}'
         - name: ORION_BIND_NET
           value: {{ .Values.server.net }}

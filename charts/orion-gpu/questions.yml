@@ -96,7 +96,7 @@ questions:
 - variable: controller.password
   default: "admin"
   description: "Password used to login to Orion controller web ui"
-  label: Controller Password
+  label: Controller Web Portal Password
   type: password
   required: true
   group: "General"
@@ -115,8 +115,8 @@ questions:
   group: "Settings"
 - variable: server.net
   default: "eth0"
-  description: "network interface used by Orion Server, This is a critical setting! Orion assumes that network interfaces to be used by Orion on Kubernetes nodes have exactly the same name."
-  label: Server Net
+  description: "network interface used by Orion Server, This is a critical setting! Orion assumes that network interfaces to be used on Kubernetes nodes have exactly the same name. If not, please visit https://virtai.tech for additional options."
+  label: Network Interface
   type: string
   group: "Network"
   required: true
@@ -124,13 +124,13 @@ questions:
   default: 4
   min: 1
   max: 100
-  description: "number of vGPUs generated for each NVidia physical GPU."
-  label: Server VGPU
+  description: "number of vGPUs created for each NVidia physical GPU."
+  label: VGPU Numbers
   type: int
   group: "Settings"
   required: true
 - variable: server.cudaVersion
-  default: "10.0"
+  default: "10.1"
   description: "cuda version to be supported by Orion"
   label: Server CUDA
   type: enum
@@ -145,13 +145,13 @@ questions:
 - variable: server.ibName
   default: ""
   description: "infiniband network name. Please leave it blank if you do not know how to set this value, Orion will try to auto detect the settings."
-  label: Server IB
+  label: Infiniband Network Name
   type: string
   group: "Network"
 - variable: resources.name
   default: "virtaitech.com/gpu"
   required: true
   description: "Resource name provided by Kubernetes and then be request by Orion client"
-  label: Resource
+  label: Orion Resource Name 
   type: string
   group: "General"

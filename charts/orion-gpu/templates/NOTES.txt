@@ -1,2 +1,2 @@
-1. Orion web portal is available at [any kubernetes node ip]:{{ .Values.controller.nodeport }}, with admin password: {{ .Values.controller.password }}
+1. Orion web portal is available at [any kubernetes node ip]:{{ .Values.controller.nodeport | add 2 }}, with admin password: {{ .Values.controller.password }}
 2. Do not know what to do next? Please visit https://virtai.tech to learn how to deploy orion clients to utilize the virtual gpu resources!

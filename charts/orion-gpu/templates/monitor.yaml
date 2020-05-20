@@ -14,6 +14,10 @@ spec:
     type: RollingUpdate
   template:
     metadata:
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '9100'
+        prometheus.io/path: 'metrics'
       labels:
         name: orion-monitor
         app: orion-monitor
@@ -21,6 +25,8 @@ spec:
       tolerations:
       - key: node-role.kubernetes.io/master
         effect: NoSchedule
+      hostNetwork: true
+      hostPID: true
       containers:
       - image: '{{ .Values.monitor.image.exporter.repository }}:{{ default .Chart.AppVersion .Values.monitor.image.exporter.version }}'
         name: nv-exporter

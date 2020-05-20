@@ -39,10 +39,10 @@ spec:
         - name: ORION_PORT
           value: '{{ .Values.controller.port }}'
         - name: EXT_DB
-          value: "127.0.0.1:9020"
-        - name: TOKEN
+          value: "127.0.0.1:9090" # TODO: should be the same as the port in prometheus
+        - name: TOKEN # TODO: use secret?
           value: {{ .Values.controller.token }}
-        - name: ADMIN_PASSWD
+        - name: ADMIN_PASSWD # TODO: use secret?
           value: {{ .Values.controller.password }}
         - name: ORION_LICENSE
           value: {{ .Values.license.key }}
