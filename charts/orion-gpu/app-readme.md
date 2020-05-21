@@ -2,17 +2,16 @@
 
 VirtAI Orion Platform can virtualize GPUs and create GPU resource pool to:
 
-* Aggregate physical GPUs resides on different servers (which are both difficult to manage and use!)
-  * Easy to manage!
-  * Easy to use!
-* Create multiple virtual GPUs from a single physical GPU (provide isolation and throttling among light weighted workloads and thus improving GPU utilization)
+* Aggregate physical GPUs resides on different servers, making GPU resources easy to manage and use!
+* Create multiple virtual GPUs from a single physical GPU
   * Resource isolation and throttling
-  * Improving GPU utilization
+  * Improve GPU utilization
   * Save money!
 * Turn every CPU server into GPU server
   * Access remote GPU on a CPU only server. No sweat!
 * Dynamic scaling
-  * Change Orion virtual GPU settings without rebooting!
+  * Request more virtual GPU resources on the fly!
+  * Change Orion virtual GPU settings without reboot!
 
 ## Chart Details
 
@@ -22,13 +21,16 @@ This chart will do the following:
 * Deploy Orion server
 * Deploy Orion kubernetes device plugin
 * Deploy Orion scheduler
+* Deploy Orion monitor
+* Deploy Orion helper (for labeling kubernetes nodes)
 
-To use Orion, you may want to deploy [Orion Client](https://virtai.tech/)
+Please check **Detailed Descriptions** for further instructions.
 
 ## Useful links
 
-[VirtAI Tech](https://virtai.tech/)
+* [VirtAI Tech](https://www.virtaitech.com)
+* [User Guide](https://github.com/virtaitech/orion-docs/blob/master/Orion-User-Guide.md)
 
 ## Activate Your Orion
 
-Don't have a license? Please visit [VirtAI Tech](https://virtai.tech/) to get one trial license for FREE.
+Don't have a license? Please visit [VirtAI Tech](https://www.virtaitech.com) to get one. FREE trail is also available!

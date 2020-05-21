@@ -18,17 +18,22 @@ questions:
   #  type: string
   #  label: Server Image Name
   - variable: server.image.version
-    default: "dtf"
+    default: "2.1"
     description: "Orion server image tag"
     type: string
     label: Server Image Tag
+  - variable: controller.image.prom
+    default: "virtaitech/prometheus"
+    description: "Orion controller monitor image name"
+    type: string
+    label: Controller Monitor Image Name
   - variable: controller.image.repository
-    default: "virtaitech/orion-controller"
+    default: "virtaitech/orion-controller-ent"
     description: "Orion controller image name"
     type: string
     label: Controller Image Name
   - variable: controller.image.version
-    default: "dtf"
+    default: "2.1"
     description: "Orion controller image tag"
     type: string
     label: Controller Image Tag
@@ -38,7 +43,7 @@ questions:
     type: string
     label: Plugin Image Name
   - variable: plugin.image.version
-    default: "dtf"
+    default: "2.1"
     description: "Plugin controller image tag"
     type: string
     label: Plugin Image Tag
@@ -82,13 +87,23 @@ questions:
     description: "extender image version"
     type: string
     label: Extender Image Tag
+  - variable: helper.image.repository
+    default: "virtaitech/orion-helper"
+    description: "Orion helper image name"
+    type: string
+    label: Helper Image Name
+  - variable: helper.image.version
+    default: "2.1"
+    description: "Orion helper image tag"
+    type: string
+    label: Helper Image Tag
   - variable: imagePullSecrets
     description: "Image Pull Secret"
     type: string
     label: Image Pull Secret
 - variable: license.key
   default: ""
-  description: "A license key is required to use Orion vGPU, if you don't have one, please visit https://virtai.tech to get one."
+  description: "A license key is required to use Orion vGPU, if you don't have one, please visit https://www.virtaitech.com to get one. FREE trial is available!"
   label: License Key
   type: string
   group: "General"
@@ -109,13 +124,13 @@ questions:
   group: "General"
 - variable: controller.enableQuota
   default: "false"
-  description: "Controller enables quota limitations. please visit https://virtai.tech for more information."
+  description: "Controller enables quota limitations. please visit https://www.virtaitech.com for more information."
   label: Controller Quota
   type: boolean
   group: "Settings"
 - variable: server.net
   default: "eth0"
-  description: "network interface used by Orion Server, This is a critical setting! Orion assumes that network interfaces to be used on Kubernetes nodes have exactly the same name. If not, please visit https://virtai.tech for additional options."
+  description: "network interface used by Orion Server, This is a critical setting! Orion assumes that network interfaces to be used on Kubernetes nodes have exactly the same name. If not, please visit https://www.virtaitech.com for additional options."
   label: Network Interface
   type: string
   group: "Network"

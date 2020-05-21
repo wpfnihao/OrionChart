@@ -53,19 +53,19 @@ spec:
           value: "0"
         {{- end }}
         ports:
-        - name: controller
+        - name: {{ .Values.controller.portName0 }}
           containerPort: {{ .Values.controller.port | atoi }}
-        - name: port1
+        - name: {{ .Values.controller.portName1 }}
           containerPort: {{ .Values.controller.port | atoi | add 1 }}
-        - name: port2
+        - name: {{ .Values.controller.portName2 }}
           containerPort: {{ .Values.controller.port | atoi | add 2 }}
         volumeMounts:
         - name: time
           mountPath: /etc/localtime
         - name: timezone
           mountPath: /etc/timezone
-        - name: licensefile
-          mountPath: /root/license.txt
+        #- name: licensefile
+        #  mountPath: /root/license.txt
         #- name: license
         #  mountPath: /root # TODO: move this to a different place, remember to change --license in the container
       volumes:
@@ -81,6 +81,6 @@ spec:
       - name: timezone
         hostPath:
           path: /etc/timezone
-      - name: licensefile
-        hostPath:
-          path: /home/ubuntu/license.txt
+      #- name: licensefile
+      #  hostPath:
+      #    path: /home/ubuntu/license.txt

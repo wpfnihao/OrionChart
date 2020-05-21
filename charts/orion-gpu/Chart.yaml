@@ -6,9 +6,9 @@ appVersion: "2.1"
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 version: 1.0.0
-description: Orion is Cool
-home: https://virtai.tech
-icon: https://virtai.tech/wp-content/uploads/2019/06/logo-new.png
+description: VirtAI Orion Platform can virtulize GPUs and create GPU resource pool
+home: https://www.virtaitech.com
+icon: https://portalprodstorage.blob.core.chinacloudapi.cn/static-resources/images/virtai-logo.png
 keywords:
 - GPU
 - virtualization

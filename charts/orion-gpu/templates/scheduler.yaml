@@ -22,7 +22,7 @@ spec:
           name: orion-scheduler-config
       containers:
       - name: orion-scheduler-ctr
-        image: '{{ .Values.scheduler.image.scheduler.repository }}:{{ .Values.scheduler.image.scheduler.version }}'
+        image: '{{ .Values.scheduler.image.scheduler.repository }}:{{ default .Chart.AppVersion .Values.scheduler.image.scheduler.version }}'
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         {{- if .Values.imagePullSecrets }}
         imagePullSecrets:

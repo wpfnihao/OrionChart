@@ -9,13 +9,13 @@ spec:
   ports:
   - protocol: TCP
     port: {{ .Values.controller.port | atoi }}
-    targetPort: controller
+    targetPort: {{ .Values.controller.portName0 }}
     name: {{ .Values.controller.portName0 }}
   - protocol: TCP
     port: {{ .Values.controller.port | atoi | add 1 }}
-    targetPort: port1
+    targetPort: {{ .Values.controller.portName1 }}
     name: {{ .Values.controller.portName1 }}
   - protocol: TCP
     port: {{ .Values.controller.port | atoi | add 2 }}
-    targetPort: port2
+    targetPort: {{ .Values.controller.portName2 }}
     name: {{ .Values.controller.portName2 }}
