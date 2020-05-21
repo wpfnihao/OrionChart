@@ -94,7 +94,7 @@ spec:
 
 * Orion Device Plugin
   * > 2020/05/21 06:58:33 Fail to get device list. Retry in 2 seconds ...
-    * Please make sure `License Key` is provided. Orion requires a license key to use. If you do not have one, please visit https://www.virtaitech.com/product/index to get one.
+    * Please make sure `License Key` is provided. Orion requires a license key to use. If you do not have one, please visit <https://www.virtaitech.com/product/index> to get one.
   * > 2020/05/21 06:58:03 Waiting for network interface eth0
     * Orion assumes the network interface to be used has exactly the same name among all nodes (e.g. `eth0`). If not, it's users' responsibility to properly config these network interface names.
 * Orion Server
