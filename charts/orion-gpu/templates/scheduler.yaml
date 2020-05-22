@@ -40,7 +40,7 @@ spec:
         #command: ["/go/bin/scheduler"]
         env:
         - name: ORION_CONTROLLER
-          value: '{{ .Values.controller.service }}.default.svc.cluster.local:{{ .Values.controller.port | atoi }}' # TODO how to make sure svc.cluster.local is the correct suffix?
+          value: '{{ .Values.controller.service }}.{{- .Release.Namespace -}}.svc.cluster.local:{{ .Values.controller.port | atoi }}' # TODO how to make sure svc.cluster.local is the correct suffix?
         - name: ORION_API_VERSION
           value: '{{ default .Chart.AppVersion .Values.scheduler.apiVersion }}'
         - name: ORION_DATA_VERSION
