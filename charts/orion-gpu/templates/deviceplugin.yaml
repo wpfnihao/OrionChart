@@ -47,6 +47,8 @@ spec:
           value: {{ .Values.resources.name }}
         - name: ORION_BIND_NET
           value: {{ .Values.server.net }}
+        - name: CONTROLLER_API_VERSION
+          value: '{{ .Values.controller.version }}'
       volumes:
         - name: device-plugin
           hostPath:

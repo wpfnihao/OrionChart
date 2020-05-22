@@ -29,6 +29,7 @@ spec:
         - name: prometheus
           mountPath: /etc/prometheus
       - name: controller
+        command: ['/entrypoint.sh']
         image: '{{ .Values.controller.image.repository }}:{{ default .Chart.AppVersion .Values.controller.image.version }}'
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         {{- if .Values.imagePullSecrets }}
@@ -67,7 +68,7 @@ spec:
         #- name: licensefile
         #  mountPath: /root/license.txt
         #- name: license
-        #  mountPath: /root # TODO: move this to a different place, remember to change --license in the container
+        #  mountPath: /home # TODO: move this to a different place, remember to change --license in the container
       volumes:
       - name: prometheus
         configMap:

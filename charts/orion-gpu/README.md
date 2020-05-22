@@ -70,7 +70,7 @@ spec:
   hostIPC: true
   containers:
   - name: test
-    image: orion-client-2.1:cu10.1-tf1.14-py3.6-hvd
+    image: virtaitech/orion-client-2.2:cuda10.1-tf1.14-py3.6-hvd
     command: ["sleep infinity"]
     # Please make sure these values are properly set
     env:
@@ -97,6 +97,8 @@ spec:
     * Please make sure `License Key` is provided. Orion requires a license key to use. If you do not have one, please visit <https://www.virtaitech.com/product/index> to get one.
   * > 2020/05/21 06:58:03 Waiting for network interface eth0
     * Orion assumes the network interface to be used has exactly the same name among all nodes (e.g. `eth0`). If not, it's users' responsibility to properly config these network interface names.
+  * > Cannot reach orion contoller...
+    * Invalid license key could make orion controller exit immediately. Please check orion controller logs at `/root/controller.log`.
 * Orion Server
   * > 2020-05-21 07:02:33 [INFO] Waiting for net eth0 becoming ready ...
     * Orion assumes the network interface to be used has exactly the same name among all nodes (e.g. `eth0`). If not, it's users' responsibility to properly config these network interface names.
@@ -105,6 +107,10 @@ spec:
     > Error: Failed to initialize NVML  
     > time="2020-05-21T06:58:03Z" level=fatal msg="Error starting nv-hostengine: DCGM initialization error"
     * You can safely ignore this message if the monitor is deployed on CPU only node. If you get these messages on GPU nodes, please make sure you have NVidia drivers and container runtime properly installed.
+
+## Known issues
+
+* Orion controller web portal cannot show GPU utilizations.
 
 ## Useful links
 

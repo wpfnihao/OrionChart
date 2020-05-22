@@ -30,7 +30,7 @@ spec:
       #nodeSelector:
       #  gpu: "true"
       containers:
-      - image: 'virtaitech/orion-server-cuda{{- .Values.server.cudaVersion -}}:{{ default .Chart.AppVersion .Values.server.image.version }}'
+      - image: 'virtaitech/orion-server-{{ .Values.server.image.version }}:cuda{{ .Values.server.cudaVersion }}'
         name: orion-server
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         {{- if .Values.imagePullSecrets }}
