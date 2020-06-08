@@ -18,7 +18,7 @@ questions:
   #  type: string
   #  label: Server Image Name
   - variable: server.image.version
-    default: "2.1"
+    default: "2.2"
     description: "Orion server image tag"
     type: string
     label: Server Image Tag
@@ -33,7 +33,7 @@ questions:
     type: string
     label: Controller Image Name
   - variable: controller.image.version
-    default: "2.1"
+    default: "2.2"
     description: "Orion controller image tag"
     type: string
     label: Controller Image Tag
@@ -43,7 +43,7 @@ questions:
     type: string
     label: Plugin Image Name
   - variable: plugin.image.version
-    default: "2.1"
+    default: "2.2"
     description: "Plugin controller image tag"
     type: string
     label: Plugin Image Tag
@@ -53,7 +53,7 @@ questions:
     type: string
     label: dcgm Image Name
   - variable: monitor.image.exporter.version
-    default: "2.1"
+    default: "2.2"
     description: "dcgm exporter image tag"
     type: string
     label: dcgm Image Tag
@@ -63,7 +63,7 @@ questions:
     type: string
     label: Node Image Name
   - variable: monitor.image.prometheus.version
-    default: "2.1"
+    default: "2.2"
     description: "node exporter image tag"
     type: string
     label: Node Image Tag
@@ -73,7 +73,7 @@ questions:
     type: string
     label: Scheduler Image Name
   - variable: scheduler.image.scheduler.version
-    default: "2.1"
+    default: "2.2"
     description: "scheduler image version"
     type: string
     label: Scheduler Image Tag
@@ -83,7 +83,7 @@ questions:
     type: string
     label: Extender Image Name
   - variable: scheduler.image.extender.version
-    default: "2.1"
+    default: "2.2"
     description: "extender image version"
     type: string
     label: Extender Image Tag
@@ -93,7 +93,7 @@ questions:
     type: string
     label: Helper Image Name
   - variable: helper.image.version
-    default: "2.1"
+    default: "2.2"
     description: "Orion helper image tag"
     type: string
     label: Helper Image Tag

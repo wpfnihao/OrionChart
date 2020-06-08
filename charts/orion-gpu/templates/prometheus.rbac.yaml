@@ -33,8 +33,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  #name: orion-controller
-  name: cluster-admin
+  name: orion-controller
 subjects:
 - kind: ServiceAccount
   name: orion-controller

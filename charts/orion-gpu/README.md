@@ -90,6 +90,26 @@ spec:
         virtaitech.com/gpu: 1
 ```
 
+* Tons of examples are available at `/root/cuda_samples`: you may try `/root/cuda_samples/deviceQuery/deviceQuery`
+* If you do not have RDMA network enabled, please change the client config as follows:
+
+  ```bash
+  kubectl exec -it pod/testgpu /bin/bash
+  vi /etc/orion/client.conf
+  ```
+  
+  ```ini
+  [log]
+      log_with_time = true
+      log_to_screen = false
+      log_to_file = true
+      log_level = INFO
+      file_log_level = INFO
+  # add the following lines
+  [client]
+      enable_net = true
+  ```
+
 ## Troubleshooting
 
 * Orion Device Plugin
