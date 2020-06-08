@@ -16,7 +16,7 @@ Orion已经与企业级Kubernetes管理平台[Rancher](https://rancher.com)深�
    #ip-172-31-28-1     Ready    worker              24d   v1.17.5
    #ip-172-31-43-188   Ready    worker              24d   v1.17.5
    #ip-172-31-43-87    Ready    controlplane,etcd   24d   v1.17.5
-   
+
    # 1.2 安装helm
    # Ubuntu上可以直接通过snap安装
    # 其它包管理器下安装helm请参考
@@ -24,7 +24,7 @@ Orion已经与企业级Kubernetes管理平台[Rancher](https://rancher.com)深�
    # 或者
    # https://github.com/helm/helm/releases
    sudo snap install helm --classic
-   
+
    # 测试helm可以正常与Kubernetes通信
    helm list
    # 示例输出
@@ -69,24 +69,24 @@ Orion已经与企业级Kubernetes管理平台[Rancher](https://rancher.com)深�
      通常每个组件使用的image可以通过组件下的`image.repository`和`image.version`来设置。例如：
 
      ```yaml
-    helper:
-       image:
-         repository: virtaitech/orion-helper
-         version: "2.2"
+     helper:
+        image:
+          repository: virtaitech/orion-helper
+          version: "2.2"
      ```
-   
+
      则最终orion helper使用的image为：`virtaitech/orion-helper:2.2`
-   
+
      但是orion server的情况比较特殊，请参考下文说明。
-   
+
    * orion helper说明
-   
-     Orion部署完成后请通过`kubectl describe node <nodeName>`查看每个node的label，确保`ORION_BIND_ADDR=<ip_address>`已经通过orion helper正确设置。如果没有的话，需要手动添加label:` kubectl label nodes <nodeName> ORION_BIND_ADDR=<ip_address>`。这里`<ip_address>`需要和`server.net`处设置的网卡的ip地址相同。如果orion server在对应节点上启动失败，则orion helper也无法正确打label。
-   
+
+     Orion部署完成后请通过`kubectl describe node <nodeName>`查看每个node的label，确保`ORION_BIND_ADDR=<ip_address>`已经通过orion helper正确设置。如果没有的话，需要手动添加label:`kubectl label nodes <nodeName> ORION_BIND_ADDR=<ip_address>`。这里`<ip_address>`需要和`server.net`处设置的网卡的ip地址相同。如果orion server在对应节点上启动失败，则orion helper也无法正确打label。
+
    * orion server镜像说明
-   
+
      orion server具体使用的镜像通过`server.image.version`和`server.cudaVersion`的组合指定。如果使用其它镜像，请将image tag成表格中的格式，并设置这两个值。请注意现在DockerHub上只有`2.2`+`10.1`的镜像（`virtaitech/orion-server-2.2:cuda10.1`），如果需要使用其它版本，请使用`docker load`导入镜像到每一个节点的`docker daemon`并打好相应tag，例如`virtaitech/orion-server-2.2:cuda9.1`。或者把镜像push到私有registry上。如果私有registry有访问控制，需要设置`values.yaml` 中`imagePullSecrets`的值。
-   
+
 4. 安装部署
 
    配置好`values.yaml`文件后，就可以通过helm安装所有Orion组件
@@ -94,7 +94,7 @@ Orion已经与企业级Kubernetes管理平台[Rancher](https://rancher.com)深�
    ```bash
    # helm可以一键部署orion
    helm install ./charts/orion-gpu/ --generate-name
-   
+
    # 如果想要看到helm生成的所有yaml文件，可以使用debug参数
    helm install ./charts/orion-gpu/ --generate-name --debug
    ```
@@ -103,7 +103,7 @@ Orion已经与企业级Kubernetes管理平台[Rancher](https://rancher.com)深�
 
    ```text
    NAME                    NAMESPACE       REVISION        UPDATED                                 STATUS   CHART                           APP VERSION
-   orion-gpu-1591596688    default         1               2020-06-08 06:11:28.953306413 +0000 UTC deployed virtaitech-orion-vgpu-1.0.0     2.2        
+   orion-gpu-1591596688    default         1               2020-06-08 06:11:28.953306413 +0000 UTC deployed virtaitech-orion-vgpu-1.0.0     2.2
    ```
 
    部署完成后可以通过`kubectl get all` 查看部署的Orion组件状态，示例输出为：
@@ -117,20 +117,20 @@ Orion已经与企业级Kubernetes管理平台[Rancher](https://rancher.com)深�
    pod/orion-plugin-n2jvc                  1/1     Running            0          5m49s
    pod/orion-server-4c6tx                  1/1     Running            0          5m49s
    pod/orion-server-dtltp                  0/1     CrashLoopBackOff   5          5m49s
-   
+
    NAME                                TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                         AGE
    service/kubernetes                  ClusterIP   10.43.0.1       <none>        443/TCP                         26d
    service/orion-controller            ClusterIP   10.43.173.242   <none>        15500/TCP,15501/TCP,15502/TCP   5m49s
    service/orion-controller-nodeport   NodePort    10.43.44.103    <none>        15502:30009/TCP                 5m49s
-   
+
    NAME                           DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
    daemonset.apps/orion-monitor   2         2         2       2            2           <none>          5m49s
    daemonset.apps/orion-plugin    2         2         2       2            2           <none>          5m49s
    daemonset.apps/orion-server    2         2         1       2            1           <none>          5m49s
-   
+
    NAME                               READY   UP-TO-DATE   AVAILABLE   AGE
    deployment.apps/orion-controller   1/1     1            1           5m49s
-   
+
    NAME                                          DESIRED   CURRENT   READY   AGE
    replicaset.apps/orion-controller-5bd9578d87   1         1         1       5m49s
    ```
@@ -159,7 +159,7 @@ Orion已经与企业级Kubernetes管理平台[Rancher](https://rancher.com)深�
    pod/rke-coredns-addon-deploy-job-n9q4z        0/1     Completed           0          26d
    ......
    pod/rke-network-plugin-deploy-job-wc5f9       0/1     Completed           0          26d
-   
+
    ......
    ```
 
@@ -171,7 +171,7 @@ Orion已经与企业级Kubernetes管理平台[Rancher](https://rancher.com)深�
 5. 使用
 
    如果部署一切正常，则可以部署Orion-client来使用Orion VGPU资源。具体可以参考`charts/orion-gpu/README.md`中的说明。
-   
+
 6. 如果想要清理到所有Orion的组件，可以使用`helm list`输出的`NAME`进行卸载：
 
    ```bash
@@ -183,5 +183,3 @@ Orion已经与企业级Kubernetes管理平台[Rancher](https://rancher.com)深�
 * `charts/orion-gpu/README.md`
 * `charts/orion-gpu/templates/NOTES.txt`
 * `charts/orion-gpu/app-readme.md`
-
-
